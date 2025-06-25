@@ -1,0 +1,10 @@
+def linear_regression(X, y, lr=0.01, epochs=1000):
+    w, b = 0, 0
+    n = len(y)
+    for _ in range(epochs):
+        y_pred = w * X + b
+        dw = (-2/n) * sum(X * (y - y_pred))
+        db = (-2/n) * sum(y - y_pred)
+        w -= lr * dw
+        b -= lr * db
+    return w, b
