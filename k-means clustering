@@ -1,0 +1,11 @@
+import numpy as np
+
+def k_means(X, k, epochs=100):
+    centroids = X[np.random.choice(len(X), k, replace=False)]
+    for _ in range(epochs):
+        labels = [np.argmin([np.linalg.norm(x-c) for c in centroids]) for x in X]
+        new_centroids = [np.mean([x for x, label in zip(X, labels) if label == i], axis=0) for i in range(k)]
+        if np.allclose(centroids, new_centroids):
+            break
+        centroids = new_centroids
+    return centroids, labels
